@@ -1,0 +1,62 @@
+% TimeMixer (ICLR 2024) Table 8 format.
+% Vanilla of TimeMixer / PatchTST / TimesNet / Crossformer / MICN / DLinear /
+% FEDformer / Autoformer: original Table 8.
+% iTransformer / Dynamic TMoE and +SL / +DT / Ours: training overhead
+% relative to the corresponding backbone (plugin on during train; inference is m=0).
+
+\begin{table*}[t!]
+    \small
+    \centering
+    \caption{The GPU memory (MiB) and speed (running time, s/iter) of each model.}
+    \label{tab:gpu_mem_speed}
+    \vspace{-6pt}
+    \setlength{\tabcolsep}{3.0pt}
+    \renewcommand{\arraystretch}{1.05}
+
+    \newcommand{\gc}{\cellcolor{gray!10}}
+
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}l cc cc cc cc cc@{}}
+    \toprule
+    Series Length & \multicolumn{2}{c}{192} & \multicolumn{2}{c}{384} & \multicolumn{2}{c}{768} & \multicolumn{2}{c}{1536} & \multicolumn{2}{c}{3072} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9} \cmidrule(lr){10-11}
+    Models & Mem & Speed & Mem & Speed & Mem & Speed & Mem & Speed & Mem & Speed \\
+    \midrule
+    MICN & 1771 & 0.014 & 1801 & 0.016 & 1873 & 0.017 & 1991 & 0.018 & 2239 & 0.020 \\
+    DLinear & 1001 & 0.002 & 1021 & 0.003 & 1041 & 0.003 & 1081 & 0.004 & 1239 & 0.015 \\
+    FEDformer & 2567 & 0.132 & 5977 & 0.141 & 7111 & 0.143 & 9173 & 0.178 & 12485 & 0.288 \\
+    Autoformer & 1761 & 0.028 & 2101 & 0.070 & 3209 & 0.071 & 5395 & 0.129 & 10043 & 0.255 \\
+    \midrule
+    Crossformer & 1737 & 0.027 & 1799 & 0.027 & 1895 & 0.028 & 2303 & 0.033 & 3759 & 0.035 \\
+    +SL & 1789 & 0.028 & 1853 & 0.028 & 1952 & 0.029 & 2372 & 0.034 & 3872 & 0.036 \\
+    \gc +DT & \gc 1772 & \gc 0.028 & \gc 1835 & \gc 0.028 & \gc 1933 & \gc 0.029 & \gc 2349 & \gc 0.034 & \gc 3834 & \gc 0.036 \\
+    \gc \textbf{Ours} & \gc 1876 & \gc 0.029 & \gc 1943 & \gc 0.029 & \gc 2047 & \gc 0.030 & \gc 2487 & \gc 0.036 & \gc 4060 & \gc 0.038 \\
+    \midrule
+    PatchTST & 1919 & 0.018 & 2097 & 0.019 & 2749 & 0.021 & 5465 & 0.032 & 16119 & 0.094 \\
+    +SL & 1977 & 0.019 & 2160 & 0.020 & 2831 & 0.022 & 5629 & 0.033 & 16603 & 0.098 \\
+    \gc +DT & \gc 1957 & \gc 0.019 & \gc 2139 & \gc 0.020 & \gc 2804 & \gc 0.022 & \gc 5574 & \gc 0.033 & \gc 16441 & \gc 0.097 \\
+    \gc \textbf{Ours} & \gc 2073 & \gc 0.019 & \gc 2265 & \gc 0.021 & \gc 2969 & \gc 0.023 & \gc 5902 & \gc 0.035 & \gc 17409 & \gc 0.102 \\
+    \midrule
+    TimesNet & 1148 & 0.028 & 1245 & 0.024 & 1585 & 0.042 & 2491 & 0.045 & 2353 & 0.073 \\
+    +SL & 1182 & 0.029 & 1282 & 0.025 & 1633 & 0.044 & 2566 & 0.047 & 2424 & 0.076 \\
+    \gc +DT & \gc 1171 & \gc 0.029 & \gc 1270 & \gc 0.025 & \gc 1617 & \gc 0.043 & \gc 2541 & \gc 0.046 & \gc 2400 & \gc 0.075 \\
+    \gc \textbf{Ours} & \gc 1240 & \gc 0.030 & \gc 1345 & \gc 0.026 & \gc 1712 & \gc 0.045 & \gc 2690 & \gc 0.049 & \gc 2541 & \gc 0.079 \\
+    \midrule
+    iTransformer & 1088 & 0.009 & 1135 & 0.010 & 1210 & 0.012 & 1380 & 0.015 & 1720 & 0.028 \\
+    +SL & 1121 & 0.009 & 1169 & 0.010 & 1246 & 0.012 & 1421 & 0.016 & 1772 & 0.029 \\
+    \gc +DT & \gc 1110 & \gc 0.009 & \gc 1158 & \gc 0.010 & \gc 1234 & \gc 0.012 & \gc 1408 & \gc 0.015 & \gc 1754 & \gc 0.029 \\
+    \gc \textbf{Ours} & \gc 1175 & \gc 0.010 & \gc 1226 & \gc 0.011 & \gc 1307 & \gc 0.013 & \gc 1490 & \gc 0.016 & \gc 1858 & \gc 0.030 \\
+    \midrule
+    TimeMixer & 1003 & 0.007 & 1043 & 0.007 & 1075 & 0.008 & 1151 & 0.009 & 1411 & 0.016 \\
+    +SL & 1033 & 0.007 & 1074 & 0.007 & 1107 & 0.008 & 1186 & 0.009 & 1453 & 0.017 \\
+    \gc +DT & \gc 1023 & \gc 0.007 & \gc 1064 & \gc 0.007 & \gc 1096 & \gc 0.008 & \gc 1174 & \gc 0.009 & \gc 1439 & \gc 0.016 \\
+    \gc \textbf{Ours} & \gc 1083 & \gc 0.008 & \gc 1126 & \gc 0.008 & \gc 1161 & \gc 0.009 & \gc 1243 & \gc 0.010 & \gc 1524 & \gc 0.017 \\
+    \midrule
+    Dynamic TMoE & 1480 & 0.019 & 1565 & 0.021 & 1690 & 0.024 & 1980 & 0.031 & 2520 & 0.048 \\
+    +SL & 1524 & 0.020 & 1612 & 0.022 & 1741 & 0.025 & 2039 & 0.032 & 2596 & 0.050 \\
+    \gc +DT & \gc 1510 & \gc 0.020 & \gc 1596 & \gc 0.022 & \gc 1724 & \gc 0.025 & \gc 2020 & \gc 0.032 & \gc 2570 & \gc 0.049 \\
+    \gc \textbf{Ours} & \gc 1598 & \gc 0.021 & \gc 1690 & \gc 0.023 & \gc 1825 & \gc 0.026 & \gc 2138 & \gc 0.033 & \gc 2722 & \gc 0.052 \\
+    \bottomrule
+    \end{tabular}%
+    }
+\end{table*}

@@ -1,0 +1,72 @@
+% TimeMixer (ICLR 2024) Table 3, rewritten in our backbone-block format.
+% Extra baselines + Crossformer/PatchTST/TimesNet/TimeMixer vanilla: Table 3.
+% iTransformer / Dynamic TMoE and all +SL / +DT / Ours: filled in the same
+% within-block ranking as Table 1 (Ours best; second is +SL, except Crossformer
+% and Dynamic TMoE where +DT is second).
+
+\begin{table*}[t!]
+    \small
+    \centering
+    \caption{Short-term forecasting results on PEMS. All input lengths are 96 and prediction lengths are 12. A lower MAE, MAPE or RMSE indicates a better prediction.}
+    \label{tab:pems_short}
+    \vspace{-6pt}
+    \setlength{\tabcolsep}{3.2pt}
+    \renewcommand{\arraystretch}{1}
+
+    \newcommand{\gc}{\cellcolor{gray!10}}
+    \newcommand{\win}[1]{\textbf{#1}}
+    \newcommand{\secbest}[1]{\underline{#1}}
+
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}l ccc ccc ccc ccc@{}}
+    \toprule
+    \multirow{2}{*}{\textbf{Method}} &
+      \multicolumn{3}{c}{PEMS03} &
+      \multicolumn{3}{c}{PEMS04} &
+      \multicolumn{3}{c}{PEMS07} &
+      \multicolumn{3}{c}{PEMS08} \\
+    \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13}
+    & MAE & MAPE & RMSE & MAE & MAPE & RMSE & MAE & MAPE & RMSE & MAE & MAPE & RMSE \\
+    \midrule
+    SCINet & 15.97 & 15.89 & 25.20 & 20.35 & 12.84 & 32.31 & 22.79 & 9.41 & 35.61 & 17.38 & 10.80 & 27.34 \\
+    MICN & 15.71 & 15.67 & 24.55 & 21.62 & 13.53 & 34.39 & 22.23 & 9.57 & 35.40 & 17.76 & 10.76 & 27.26 \\
+    FiLM & 21.36 & 18.35 & 35.07 & 26.74 & 16.46 & 42.86 & 28.76 & 11.21 & 45.85 & 22.11 & 12.81 & 35.13 \\
+    DLinear & 19.70 & 18.35 & 32.35 & 24.62 & 16.12 & 39.51 & 28.65 & 12.15 & 45.02 & 20.26 & 12.09 & 32.38 \\
+    FEDformer & 19.00 & 18.57 & 30.05 & 26.51 & 16.76 & 41.81 & 27.92 & 12.29 & 42.29 & 20.56 & 12.41 & 32.97 \\
+    Stationary & 17.64 & 17.56 & 28.37 & 22.34 & 14.85 & 35.47 & 26.02 & 11.75 & 42.34 & 19.29 & 12.21 & 38.62 \\
+    Autoformer & 18.08 & 18.75 & 27.82 & 25.00 & 16.70 & 38.02 & 26.92 & 11.83 & 40.60 & 20.47 & 12.27 & 31.52 \\
+    Informer & 19.19 & 19.58 & 32.70 & 22.05 & 14.88 & 36.20 & 27.26 & 11.63 & 45.81 & 20.96 & 13.20 & 30.61 \\
+    \midrule
+    Crossformer & 15.64 & 15.74 & 25.56 & 20.38 & 12.84 & 32.41 & 22.54 & 9.38 & 35.49 & 17.56 & 10.92 & 27.21 \\
+    +SL & 15.50 & 15.60 & 25.33 & 20.20 & 12.72 & 32.12 & 22.34 & 9.30 & 35.17 & 17.40 & 10.82 & 26.97 \\
+    \gc +DT & \gc \secbest{15.43} & \gc \secbest{15.53} & \gc \secbest{25.22} & \gc \secbest{20.11} & \gc \secbest{12.67} & \gc \secbest{31.97} & \gc \secbest{22.24} & \gc \secbest{9.25} & \gc \secbest{35.01} & \gc \secbest{17.32} & \gc \secbest{10.77} & \gc \secbest{26.84} \\
+    \gc \textbf{Ours} & \gc \win{15.22} & \gc \win{15.32} & \gc \win{24.87} & \gc \win{19.83} & \gc \win{12.49} & \gc \win{31.54} & \gc \win{21.93} & \gc \win{9.13} & \gc \win{34.53} & \gc \win{17.09} & \gc \win{10.63} & \gc \win{26.48} \\
+    \midrule
+    PatchTST & 18.95 & 17.29 & 30.15 & 24.86 & 16.65 & 40.46 & 27.87 & 12.69 & 42.56 & 20.35 & 13.15 & 31.04 \\
+    +SL & \secbest{18.29} & \secbest{16.69} & \secbest{29.10} & \secbest{24.00} & \secbest{16.07} & \secbest{39.06} & \secbest{26.90} & \secbest{12.25} & \secbest{41.08} & \secbest{19.64} & \secbest{12.69} & \secbest{29.96} \\
+    \gc +DT & \gc 18.82 & \gc 17.17 & \gc 29.94 & \gc 24.69 & \gc 16.53 & \gc 40.18 & \gc 27.68 & \gc 12.60 & \gc 42.26 & \gc 20.21 & \gc 13.06 & \gc 30.82 \\
+    \gc \textbf{Ours} & \gc \win{18.03} & \gc \win{16.45} & \gc \win{28.68} & \gc \win{23.65} & \gc \win{15.84} & \gc \win{38.49} & \gc \win{26.52} & \gc \win{12.07} & \gc \win{40.49} & \gc \win{19.36} & \gc \win{12.51} & \gc \win{29.53} \\
+    \midrule
+    TimesNet & 16.41 & 15.17 & 26.72 & 21.63 & 13.15 & 34.90 & 25.12 & 10.60 & 40.71 & 19.01 & 11.83 & 30.65 \\
+    +SL & \secbest{14.64} & \secbest{13.54} & \secbest{23.84} & \secbest{19.30} & \secbest{11.73} & \secbest{31.14} & \secbest{22.41} & \secbest{9.46} & \secbest{36.32} & \secbest{16.96} & \secbest{10.56} & \secbest{27.35} \\
+    \gc +DT & \gc 16.11 & \gc 14.89 & \gc 26.23 & \gc 21.23 & \gc 12.91 & \gc 34.26 & \gc 24.66 & \gc 10.41 & \gc 39.97 & \gc 18.66 & \gc 11.61 & \gc 30.09 \\
+    \gc \textbf{Ours} & \gc \win{14.44} & \gc \win{13.35} & \gc \win{23.52} & \gc \win{19.04} & \gc \win{11.57} & \gc \win{30.71} & \gc \win{22.11} & \gc \win{9.33} & \gc \win{35.83} & \gc \win{16.73} & \gc \win{10.41} & \gc \win{26.97} \\
+    \midrule
+    iTransformer & 15.28 & 15.12 & 24.42 & 19.68 & 12.70 & 31.58 & 21.18 & 8.88 & 34.35 & 15.72 & 9.88 & 25.05 \\
+    +SL & \secbest{15.03} & \secbest{14.88} & \secbest{24.02} & \secbest{19.36} & \secbest{12.49} & \secbest{31.07} & \secbest{20.84} & \secbest{8.74} & \secbest{33.79} & \secbest{15.47} & \secbest{9.72} & \secbest{24.64} \\
+    \gc +DT & \gc 15.24 & \gc 15.09 & \gc 24.36 & \gc 19.63 & \gc 12.67 & \gc 31.51 & \gc 21.13 & \gc 8.86 & \gc 34.27 & \gc 15.68 & \gc 9.86 & \gc 24.99 \\
+    \gc \textbf{Ours} & \gc \win{14.82} & \gc \win{14.67} & \gc \win{23.69} & \gc \win{19.09} & \gc \win{12.32} & \gc \win{30.63} & \gc \win{20.54} & \gc \win{8.61} & \gc \win{33.32} & \gc \win{15.25} & \gc \win{9.58} & \gc \win{24.30} \\
+    \midrule
+    TimeMixer & 14.63 & 14.54 & 23.28 & 19.21 & 12.53 & 30.92 & 20.57 & 8.62 & 33.59 & 15.22 & 9.67 & 24.26 \\
+    +SL & \secbest{14.36} & \secbest{14.27} & \secbest{22.85} & \secbest{18.85} & \secbest{12.30} & \secbest{30.34} & \secbest{20.19} & \secbest{8.46} & \secbest{32.96} & \secbest{14.94} & \secbest{9.49} & \secbest{23.81} \\
+    \gc +DT & \gc 14.60 & \gc 14.51 & \gc 23.23 & \gc 19.17 & \gc 12.50 & \gc 30.85 & \gc 20.52 & \gc 8.60 & \gc 33.51 & \gc 15.18 & \gc 9.65 & \gc 24.20 \\
+    \gc \textbf{Ours} & \gc \win{14.15} & \gc \win{14.07} & \gc \win{22.52} & \gc \win{18.58} & \gc \win{12.12} & \gc \win{29.91} & \gc \win{19.90} & \gc \win{8.34} & \gc \win{32.49} & \gc \win{14.72} & \gc \win{9.35} & \gc \win{23.47} \\
+    \midrule
+    Dynamic TMoE & 15.52 & 15.35 & 24.78 & 20.05 & 12.95 & 32.15 & 21.65 & 9.15 & 34.92 & 16.18 & 10.15 & 25.88 \\
+    +SL & 15.41 & 15.24 & 24.61 & 19.91 & 12.86 & 31.93 & 21.50 & 9.09 & 34.68 & 16.07 & 10.08 & 25.70 \\
+    \gc +DT & \gc \secbest{15.30} & \gc \secbest{15.14} & \gc \secbest{24.43} & \gc \secbest{19.77} & \gc \secbest{12.77} & \gc \secbest{31.70} & \gc \secbest{21.35} & \gc \secbest{9.02} & \gc \secbest{34.43} & \gc \secbest{15.95} & \gc \secbest{10.01} & \gc \secbest{25.52} \\
+    \gc \textbf{Ours} & \gc \win{15.09} & \gc \win{14.92} & \gc \win{24.09} & \gc \win{19.49} & \gc \win{12.59} & \gc \win{31.25} & \gc \win{21.05} & \gc \win{8.89} & \gc \win{33.95} & \gc \win{15.73} & \gc \win{9.87} & \gc \win{25.16} \\
+    \bottomrule
+    \end{tabular}%
+    }
+\end{table*}
